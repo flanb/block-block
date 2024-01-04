@@ -8,6 +8,7 @@ import SceneManager from 'utils/SceneManager.js'
 import sources from './sources.json'
 import { Mesh, Scene } from 'three'
 import AudioManager from 'utils/AudioManager.js'
+import PhysicsWorld from 'webgl/PhysicsWorld.js'
 
 let instance = null
 
@@ -35,6 +36,7 @@ export default class Experience {
 		this.camera = new Camera()
 		this.renderer = new Renderer()
 		this.audioManager = new AudioManager()
+		this.physicsWorld = new PhysicsWorld()
 
 		// Resize event
 		this.sizes.on('resize', () => {
@@ -56,6 +58,7 @@ export default class Experience {
 		this.activeScene.update()
 		this.renderer.update()
 		this.debug.update()
+		this.physicsWorld.update()
 	}
 
 	destroy() {
