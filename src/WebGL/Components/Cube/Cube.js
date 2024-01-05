@@ -28,10 +28,20 @@ export default class Cube {
 		this.material = new MeshBasicMaterial({
 			color: 0xff0000,
 		})
+		this.faceMaterial = new MeshBasicMaterial({
+			color: 0x0000ff,
+		})
 	}
 
 	setMesh() {
-		this.mesh = new Mesh(this.geometry, this.material)
+		this.mesh = new Mesh(this.geometry, [
+			this.material,
+			this.material,
+			this.material,
+			this.material,
+			this.material,
+			this.faceMaterial,
+		])
 		this.mesh.position.copy(this.position)
 		this.mesh.name = 'playerCube'
 		this.scene.add(this.mesh)
