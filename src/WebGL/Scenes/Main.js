@@ -1,6 +1,8 @@
 import Experience from '../Experience.js'
 import Floor from 'components/Floor.js'
 import Cube from 'components/Cube/Cube.js'
+import Map from 'components/Map.js'
+import Environment from 'components/Environment.js'
 
 export default class Main {
 	constructor() {
@@ -13,6 +15,8 @@ export default class Main {
 			// Setup
 			this.floor = new Floor()
 			this.cube = new Cube()
+			this.map = new Map()
+			this.environment = new Environment()
 		})
 	}
 
