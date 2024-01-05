@@ -1,7 +1,7 @@
 import * as CANNON from 'cannon-es'
 import Experience from 'webgl/Experience.js'
 import { lerp } from 'three/src/math/MathUtils.js'
-import { Vector3, BoxGeometry, Mesh, ShaderMaterial, MeshBasicMaterial } from 'three'
+import { Vector3, BoxGeometry, Mesh, MeshBasicMaterial } from 'three'
 import InputManager from 'utils/InputManager.js'
 
 export default class Cube {

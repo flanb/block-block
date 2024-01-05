@@ -13,24 +13,8 @@
 		"colorSpace": "srgb"
 	},
 	{
-		"name": "grassColorTexture",
-		"type": "texture",
-		"path": "textures/dirt/color.jpg",
-		"colorSpace": "srgb"
-	},
-	{
-		"name": "grassNormalTexture",
-		"type": "texture",
-		"path": "textures/dirt/normal.jpg"
-	},
-	{
-		"name": "foxModel",
+		"name": "blockRoundedModel",
 		"type": "gltf",
-		"path": "models/Fox/glTF/Fox.gltf"
-	},
-	{
-		"name": "foxAudio",
-		"type": "audio",
-		"path": "audio/fox.mp3"
+		"path": "models/blockRounded.glb"
 	}
 ]
