@@ -19,7 +19,7 @@ export default class PhysicsWorld extends EventEmitter {
 	setDebug() {
 		this.debugFolder = this.debug.ui.addFolder({
 			title: 'physicsWorld',
-			expanded: true,
+			expanded: false,
 		})
 
 		this.debugFolder

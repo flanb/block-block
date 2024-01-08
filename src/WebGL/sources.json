@@ -13,8 +13,8 @@
 		"colorSpace": "srgb"
 	},
 	{
-		"name": "blockRoundedModel",
+		"name": "mapModel",
 		"type": "gltf",
-		"path": "models/blockRounded.glb"
+		"path": "models/map.glb"
 	}
 ]
