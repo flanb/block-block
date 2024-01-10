@@ -52,6 +52,7 @@ export default class Cube {
 		this.physicsBody = new CANNON.Body({
 			mass: 1,
 			shape: this.physicsShape,
+			name: 'playerCube',
 			position: new CANNON.Vec3(this.mesh.position.x, this.mesh.position.y, this.mesh.position.z),
 			quaternion: new CANNON.Quaternion(
 				this.mesh.quaternion.x,
@@ -59,6 +60,12 @@ export default class Cube {
 				this.mesh.quaternion.z,
 				this.mesh.quaternion.w,
 			),
+		})
+		this.physicsBody.addEventListener('collide', (event) => {
+			this.moveWith = null
+			if (event.body.name === 'moving') {
+				this.moveWith = event.body
+			}
 		})
 		this.physicsWorld.addBody(this.physicsBody)
 	}
@@ -100,6 +107,9 @@ export default class Cube {
 		}
 		if (this.controls.right) {
 			this.physicsBody.velocity.x = 0.5
+		}
+		if (this.moveWith) {
+			this.physicsBody.velocity.addScaledVector(1, this.moveWith.velocity)
 		}
 	}
 

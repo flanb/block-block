@@ -14,7 +14,7 @@ export default class Main {
 		this.resources.on('ready', () => {
 			// Setup
 			// this.floor = new Floor()
-			// this.cube = new Cube()
+			this.cube = new Cube()
 			this.environment = new Environment()
 			this.map = new Map()
 		})
