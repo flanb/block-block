@@ -12,7 +12,8 @@
 	"dependencies": {
 		"cannon-es": "^0.20.0",
 		"cannon-es-debugger": "^1.0.0",
-		"three": "^0.160.0"
+		"three": "^0.160.0",
+		"three-to-cannon": "^5.0.1"
 	},
 	"devDependencies": {
 		"@tweakpane/core": "^2.0.3",
