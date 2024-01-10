@@ -61,7 +61,7 @@ export default class PhysicsWorld extends EventEmitter {
 	}
 
 	update() {
-		this.instance.step(1 / 60, this.time.delta)
+		this.instance.step(1 / 60, this.time.delta, 3)
 		if (this.cannonDebugger) this.cannonDebugger.update()
 	}
 }
