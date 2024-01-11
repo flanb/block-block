@@ -12,11 +12,7 @@ export default class Map {
 		this.resource = this.experience.resources.items.mapModel
 
 		this.setModel()
-		this.animation = new AnimationController({
-			model: this.resource.scene,
-			animations: this.resource.animations,
-		})
-		this.animation.fadeAnimation(this.animation.animations[0].name, { loop: true, yoyo: true })
+		this.setAnimation()
 		this.setPhysics()
 		if (this.experience.debug.active) this.setDebug()
 	}
@@ -24,6 +20,14 @@ export default class Map {
 	setModel() {
 		this.model = this.resource.scene
 		this.experience.scene.add(this.model)
+	}
+
+	setAnimation() {
+		this.animation = new AnimationController({
+			model: this.resource.scene,
+			animations: this.resource.animations,
+		})
+		this.animation.fadeAnimation(this.animation.animations[0].name, { loop: true, yoyo: true })
 	}
 
 	setPhysics() {

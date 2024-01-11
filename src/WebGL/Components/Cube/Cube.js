@@ -5,7 +5,7 @@ import { Vector3, BoxGeometry, Mesh, MeshBasicMaterial } from 'three'
 import InputManager from 'utils/InputManager.js'
 
 export default class Cube {
-	constructor(_position = new Vector3(0, 2, 0)) {
+	constructor(_position = new Vector3(2, 2, -2)) {
 		this.experience = new Experience()
 		this.scene = this.experience.scene
 		this.physicsWorld = this.experience.physicsWorld
@@ -65,6 +65,9 @@ export default class Cube {
 			this.moveWith = null
 			if (event.body.name === 'moving') {
 				this.moveWith = event.body
+			}
+			if (event.body.name === 'reset') {
+				this.physicsBody.position.copy(this.position)
 			}
 		})
 		this.physicsWorld.addBody(this.physicsBody)
