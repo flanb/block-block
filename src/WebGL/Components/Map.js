@@ -3,6 +3,7 @@ import AnimationController from 'utils/AnimationController.js'
 import addObjectDebug from 'utils/addObjectDebug.js'
 import * as CANNON from 'cannon-es'
 import { threeToCannon, ShapeType } from 'three-to-cannon'
+import { Quaternion } from 'three'
 
 export default class Map {
 	constructor() {
@@ -27,30 +28,36 @@ export default class Map {
 
 	setPhysics() {
 		this.dynamicBodies = []
+		const movingMeshes = []
+		const staticBody = new CANNON.Body({
+			mass: 0,
+		})
+		this.experience.physicsWorld.addBody(staticBody)
 		this.model.traverse((child) => {
 			if (child.isMesh) {
 				const shapeResult = threeToCannon(child, {
 					type: ShapeType.BOX,
 				})
 
-				const body = new CANNON.Body({
-					mass: 0,
-					position: new CANNON.Vec3(child.position.x, child.position.y, child.position.z),
-					quaternion: new CANNON.Quaternion(
-						child.quaternion.x,
-						child.quaternion.y,
-						child.quaternion.z,
-						child.quaternion.w,
-					),
-				})
-				body.addShape(shapeResult.shape, shapeResult.offset, shapeResult.orientation)
-				body.name = 'platform'
+				const shapeQuaternion = new Quaternion()
+				if (shapeResult.orientation) shapeQuaternion.copy(shapeResult.orientation)
+				const combinedPosition = shapeResult.offset.vadd(child.position)
+				const combinedQuaternion = shapeQuaternion.multiply(child.quaternion)
+
 				if (child.name.toLowerCase().includes('moving')) {
-					body.name = 'moving'
-					body.type = CANNON.Body.KINEMATIC
-					this.dynamicBodies.push({ body, mesh: child.parent })
+					if (movingMeshes.includes(child.parent)) return
+					movingMeshes.push(child.parent)
+					const movingBody = new CANNON.Body({
+						mass: 0,
+						type: CANNON.Body.KINEMATIC,
+					})
+					movingBody.addShape(shapeResult.shape, combinedPosition, combinedQuaternion)
+					movingBody.name = 'moving'
+					this.dynamicBodies.push({ body: movingBody, mesh: child.parent })
+					this.experience.physicsWorld.addBody(movingBody)
+				} else {
+					staticBody.addShape(shapeResult.shape, combinedPosition, combinedQuaternion)
 				}
-				this.experience.physicsWorld.addBody(body)
 			}
 		})
 	}
